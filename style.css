@@ -1,0 +1,382 @@
+/* =========================
+   STUDYMATE AI - AESTHETIC UI
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 40px 20px;
+
+    font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(circle at top left, #e9ddff 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #dce7ff 0%, transparent 35%),
+        linear-gradient(135deg, #f8f7ff, #eeeaff);
+
+    color: #29263d;
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+    width: 100%;
+    max-width: 850px;
+
+    margin: 0 auto;
+    padding: 45px;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 25px 70px rgba(78, 61, 130, 0.18);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.hero {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.logo {
+    font-size: 58px;
+    margin-bottom: 8px;
+}
+
+h1 {
+    margin: 0;
+
+    font-size: 48px;
+    font-weight: 800;
+
+    background: linear-gradient(
+        90deg,
+        #3155d9,
+        #7c3aed,
+        #c026d3
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.tagline {
+    margin: 12px 0;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #6452b8;
+}
+
+.description {
+    max-width: 620px;
+
+    margin: 12px auto;
+
+    color: #77718c;
+
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* =========================
+   INPUT SECTION
+========================= */
+
+.input-section {
+    padding: 28px;
+
+    background: linear-gradient(
+        135deg,
+        #faf9ff,
+        #f5f1ff
+    );
+
+    border: 1px solid #e4dcff;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 10px 30px rgba(91, 72, 150, 0.07);
+}
+
+label {
+    display: block;
+
+    margin-bottom: 13px;
+
+    color: #4d3aa8;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+textarea {
+    width: 100%;
+    min-height: 125px;
+
+    padding: 17px;
+
+    background: white;
+
+    border: 2px solid #ddd6fe;
+    border-radius: 16px;
+
+    outline: none;
+
+    font-family: inherit;
+    font-size: 16px;
+
+    resize: vertical;
+
+    transition: 0.25s;
+}
+
+textarea:focus {
+    border-color: #8b5cf6;
+
+    box-shadow:
+        0 0 0 4px rgba(139, 92, 246, 0.12);
+}
+
+textarea::placeholder {
+    color: #aaa4bc;
+}
+
+
+/* =========================
+   MAIN BUTTONS
+========================= */
+
+button {
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 16px 22px;
+
+    border: none;
+    border-radius: 15px;
+
+    font-family: inherit;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.generate-button {
+    color: white;
+
+    background: linear-gradient(
+        90deg,
+        #3155d9,
+        #7c3aed
+    );
+
+    box-shadow:
+        0 8px 20px rgba(108, 76, 230, 0.25);
+}
+
+.generate-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(108, 76, 230, 0.35);
+}
+
+.quiz-button {
+    color: white;
+
+    background: linear-gradient(
+        90deg,
+        #ff6b9d,
+        #ff758c
+    );
+
+    box-shadow:
+        0 8px 20px rgba(255, 117, 140, 0.22);
+}
+
+.quiz-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(255, 117, 140, 0.32);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   RESULT AREA
+========================= */
+
+#result {
+    margin-top: 35px;
+
+    text-align: left;
+}
+
+#result > h2 {
+    margin-bottom: 25px;
+
+    text-align: center;
+
+    color: #4d3aa8;
+
+    font-size: 28px;
+}
+
+
+/* =========================
+   STUDY CARDS
+========================= */
+
+.study-card {
+    margin: 18px 0;
+    padding: 24px;
+
+    background: linear-gradient(
+        135deg,
+        #faf9ff,
+        #f5f2ff
+    );
+
+    border: 1px solid #e5defc;
+
+    border-left: 5px solid #7c5cff;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 7px 22px rgba(80, 60, 130, 0.08);
+}
+
+.study-card h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+
+    padding-bottom: 10px;
+
+    color: #6c4ce6;
+
+    font-size: 20px;
+
+    border-bottom: 1px solid #e5e0ff;
+}
+
+.study-card p {
+    color: #403d4d;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   QUIZ ANSWER BUTTONS
+========================= */
+
+.answer-button {
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 16px 18px;
+
+    background: white;
+
+    color: #403d4d;
+
+    border: 2px solid #e2dcf7;
+
+    border-radius: 14px;
+
+    text-align: left;
+
+    font-family: inherit;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.answer-button:hover {
+    background: #f5f0ff;
+
+    border-color: #8b5cf6;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(124, 92, 255, 0.12);
+}
+
+.answer-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 18px 10px;
+    }
+
+    .container {
+        padding: 25px 18px;
+
+        border-radius: 22px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    .logo {
+        font-size: 48px;
+    }
+
+    .tagline {
+        font-size: 17px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .input-section {
+        padding: 20px;
+    }
+}

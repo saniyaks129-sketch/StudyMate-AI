@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StudyMate AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="hero">
+
+            <div class="logo">📚</div>
+
+            <h1>StudyMate <span>AI</span></h1>
+
+            <p class="tagline">
+                Learn smarter. Prepare better. ✨
+            </p>
+
+            <p class="description">
+                Your personal AI study companion for understanding
+                difficult topics and preparing for exams.
+            </p>
+
+        </div>
+
+
+        <!-- INPUT AREA -->
+        <div class="input-section">
+
+            <label for="topic">
+                🎓 What do you want to learn?
+            </label>
+
+            <textarea
+                id="topic"
+                placeholder="✨ Enter a topic... e.g. Binary Search"
+            ></textarea>
+
+
+            <!-- MAIN BUTTON -->
+            <button
+                type="button"
+                onclick="generate()"
+                class="generate-button"
+            >
+                Generate Study Guide 🚀
+            </button>
+
+
+            <!-- QUIZ BUTTON -->
+            <button
+                type="button"
+                onclick="generateQuiz()"
+                class="quiz-button"
+            >
+                🧠 Test My Knowledge
+            </button>
+
+        </div>
+
+
+        <!-- AI RESULT -->
+        <div id="result">
+
+            <h2>📖 Your Study Guide</h2>
+
+            <p>
+                Your AI-generated explanation will appear here.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
