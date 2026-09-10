@@ -23,7 +23,7 @@ app.post('/api/study-guide', async (req, res) => {
 
     res.json({ result: response.text });
   } catch (error) {
-    console.error(error);
+    console.error('Study Guide Error:', error);
     res.status(500).json({ error: 'Failed to generate study guide. Please try again.' });
   }
 });
@@ -36,7 +36,7 @@ app.post('/api/quiz', async (req, res) => {
 
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
-      contents: `Generate a 3-question multiple choice quiz on '${topic}' in strictly valid JSON format like this:
+      contents: `Generate a 3-question multiple choice quiz on '${topic}'. Return ONLY a raw JSON array, without markdown formatting or code blocks:
       [
         {
           "question": "Question text?",
@@ -46,11 +46,14 @@ app.post('/api/quiz', async (req, res) => {
       ]`,
     });
 
-    const cleanedText = response.text.replace(/```json|```/g, '').trim();
-    const quizData = JSON.parse(cleanedText);
+    // Strip markdown code blocks if the model still includes them
+    let rawText = response.text || '';
+    rawText = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
+
+    const quizData = JSON.parse(rawText);
     res.json({ quiz: quizData });
   } catch (error) {
-    console.error(error);
+    console.error('Quiz Generation Error:', error);
     res.status(500).json({ error: 'Quiz could not be generated. Please try again.' });
   }
 });
