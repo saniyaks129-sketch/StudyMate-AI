@@ -1,382 +1,132 @@
-/* =========================
-   STUDYMATE AI - AESTHETIC UI
-========================= */
+:root {
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --secondary: #ec4899;
+  --secondary-hover: #db2777;
+  --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #eef2ff 50%, #fce7f3 100%);
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --radius: 20px;
+}
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 body {
-    margin: 0;
-    min-height: 100vh;
-    padding: 40px 20px;
-
-    font-family: Arial, sans-serif;
-
-    background:
-        radial-gradient(circle at top left, #e9ddff 0%, transparent 35%),
-        radial-gradient(circle at bottom right, #dce7ff 0%, transparent 35%),
-        linear-gradient(135deg, #f8f7ff, #eeeaff);
-
-    color: #29263d;
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  position: relative;
+  overflow-x: hidden;
 }
 
-
-/* =========================
-   MAIN CONTAINER
-========================= */
+/* Dynamic background lighting */
+.background-blobs .blob {
+  position: absolute;
+  filter: blur(80px);
+  z-index: -1;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+.blob-1 { width: 350px; height: 350px; background: #c7d2fe; top: -50px; left: -50px; }
+.blob-2 { width: 300px; height: 300px; background: #fbcfe8; bottom: -50px; right: -50px; }
 
 .container {
-    width: 100%;
-    max-width: 850px;
-
-    margin: 0 auto;
-    padding: 45px;
-
-    background: rgba(255, 255, 255, 0.94);
-
-    border: 1px solid rgba(255, 255, 255, 0.8);
-
-    border-radius: 30px;
-
-    box-shadow:
-        0 25px 70px rgba(78, 61, 130, 0.18);
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-
-/* =========================
-   HEADER
-========================= */
-
-.hero {
-    text-align: center;
-    margin-bottom: 35px;
+.header {
+  text-align: center;
 }
-
-.logo {
-    font-size: 58px;
-    margin-bottom: 8px;
+.icon-badge {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
 }
-
-h1 {
-    margin: 0;
-
-    font-size: 48px;
-    font-weight: 800;
-
-    background: linear-gradient(
-        90deg,
-        #3155d9,
-        #7c3aed,
-        #c026d3
-    );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #4f46e5, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-
-.tagline {
-    margin: 12px 0;
-
-    font-size: 20px;
-    font-weight: 700;
-
-    color: #6452b8;
+.subtitle {
+  font-weight: 700;
+  color: #4f46e5;
+  margin-top: 0.2rem;
 }
-
 .description {
-    max-width: 620px;
-
-    margin: 12px auto;
-
-    color: #77718c;
-
-    font-size: 16px;
-    line-height: 1.7;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
 }
 
-
-/* =========================
-   INPUT SECTION
-========================= */
-
-.input-section {
-    padding: 28px;
-
-    background: linear-gradient(
-        135deg,
-        #faf9ff,
-        #f5f1ff
-    );
-
-    border: 1px solid #e4dcff;
-
-    border-radius: 22px;
-
-    box-shadow:
-        0 10px 30px rgba(91, 72, 150, 0.07);
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
 }
 
-label {
-    display: block;
-
-    margin-bottom: 13px;
-
-    color: #4d3aa8;
-
-    font-size: 18px;
-    font-weight: 700;
+.card-title {
+  display: block;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 0.8rem;
 }
 
 textarea {
-    width: 100%;
-    min-height: 125px;
-
-    padding: 17px;
-
-    background: white;
-
-    border: 2px solid #ddd6fe;
-    border-radius: 16px;
-
-    outline: none;
-
-    font-family: inherit;
-    font-size: 16px;
-
-    resize: vertical;
-
-    transition: 0.25s;
+  width: 100%;
+  height: 110px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 1rem;
+  outline: none;
+  resize: none;
+  transition: all 0.2s;
 }
-
 textarea:focus {
-    border-color: #8b5cf6;
-
-    box-shadow:
-        0 0 0 4px rgba(139, 92, 246, 0.12);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
 }
 
-textarea::placeholder {
-    color: #aaa4bc;
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
 }
 
-
-/* =========================
-   MAIN BUTTONS
-========================= */
-
-button {
-    width: 100%;
-
-    margin-top: 15px;
-
-    padding: 16px 22px;
-
-    border: none;
-    border-radius: 15px;
-
-    font-family: inherit;
-
-    font-size: 16px;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition: 0.25s;
+.btn {
+  width: 100%;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
 }
-
-.generate-button {
-    color: white;
-
-    background: linear-gradient(
-        90deg,
-        #3155d9,
-        #7c3aed
-    );
-
-    box-shadow:
-        0 8px 20px rgba(108, 76, 230, 0.25);
-}
-
-.generate-button:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 12px 25px rgba(108, 76, 230, 0.35);
-}
-
-.quiz-button {
-    color: white;
-
-    background: linear-gradient(
-        90deg,
-        #ff6b9d,
-        #ff758c
-    );
-
-    box-shadow:
-        0 8px 20px rgba(255, 117, 140, 0.22);
-}
-
-.quiz-button:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 12px 25px rgba(255, 117, 140, 0.32);
-}
-
-button:active {
-    transform: translateY(0);
-}
-
-
-/* =========================
-   RESULT AREA
-========================= */
-
-#result {
-    margin-top: 35px;
-
-    text-align: left;
-}
-
-#result > h2 {
-    margin-bottom: 25px;
-
-    text-align: center;
-
-    color: #4d3aa8;
-
-    font-size: 28px;
-}
-
-
-/* =========================
-   STUDY CARDS
-========================= */
-
-.study-card {
-    margin: 18px 0;
-    padding: 24px;
-
-    background: linear-gradient(
-        135deg,
-        #faf9ff,
-        #f5f2ff
-    );
-
-    border: 1px solid #e5defc;
-
-    border-left: 5px solid #7c5cff;
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 7px 22px rgba(80, 60, 130, 0.08);
-}
-
-.study-card h3 {
-    margin-top: 0;
-    margin-bottom: 12px;
-
-    padding-bottom: 10px;
-
-    color: #6c4ce6;
-
-    font-size: 20px;
-
-    border-bottom: 1px solid #e5e0ff;
-}
-
-.study-card p {
-    color: #403d4d;
-
-    font-size: 16px;
-
-    line-height: 1.7;
-}
-
-
-/* =========================
-   QUIZ ANSWER BUTTONS
-========================= */
-
-.answer-button {
-    width: 100%;
-
-    margin-top: 12px;
-
-    padding: 16px 18px;
-
-    background: white;
-
-    color: #403d4d;
-
-    border: 2px solid #e2dcf7;
-
-    border-radius: 14px;
-
-    text-align: left;
-
-    font-family: inherit;
-
-    font-size: 16px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.answer-button:hover {
-    background: #f5f0ff;
-
-    border-color: #8b5cf6;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 6px 15px rgba(124, 92, 255, 0.12);
-}
-
-.answer-button:active {
-    transform: translateY(0);
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
-
-    body {
-        padding: 18px 10px;
-    }
-
-    .container {
-        padding: 25px 18px;
-
-        border-radius: 22px;
-    }
-
-    h1 {
-        font-size: 36px;
-    }
-
-    .logo {
-        font-size: 48px;
-    }
-
-    .tagline {
-        font-size: 17px;
-    }
-
-    .description {
-        font-size: 14px;
-    }
-
-    .input-section {
-        padding: 20px;
-    }
-}
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-secondary { background: var(--secondary); color: white; }
+.btn-secondary:hover { background: var(--secondary-hover); }
+
+.hidden { display: none; }
+.spinner { text-align: center; font-weight: 600; color: var(--primary); }

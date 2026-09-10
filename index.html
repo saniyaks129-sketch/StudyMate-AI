@@ -1,83 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>StudyMate AI</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyMate AI</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
+  <div class="background-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
 
-    <div class="container">
+  <main class="container">
+    <header class="header">
+      <div class="icon-badge">📚</div>
+      <h1>StudyMate AI</h1>
+      <p class="subtitle">Learn smarter. Prepare better. ✨</p>
+      <p class="description">Your personal AI study companion for understanding difficult topics and preparing for exams.</p>
+    </header>
 
-        <!-- HEADER -->
-        <div class="hero">
+    <section class="card">
+      <label for="topicInput" class="card-title">🎓 What do you want to learn?</label>
+      <textarea id="topicInput" placeholder="e.g., Binary Search, Quantum Physics, Photosynthesis..."></textarea>
+      
+      <div class="button-group">
+        <button id="guideBtn" class="btn btn-primary">Generate Study Guide 🚀</button>
+        <button id="quizBtn" class="btn btn-secondary">🧠 Test My Knowledge</button>
+      </div>
+    </section>
 
-            <div class="logo">📚</div>
+    <!-- Results Output Area -->
+    <section id="outputCard" class="card hidden">
+      <div id="outputContent"></div>
+    </section>
+  </main>
 
-            <h1>StudyMate <span>AI</span></h1>
-
-            <p class="tagline">
-                Learn smarter. Prepare better. ✨
-            </p>
-
-            <p class="description">
-                Your personal AI study companion for understanding
-                difficult topics and preparing for exams.
-            </p>
-
-        </div>
-
-
-        <!-- INPUT AREA -->
-        <div class="input-section">
-
-            <label for="topic">
-                🎓 What do you want to learn?
-            </label>
-
-            <textarea
-                id="topic"
-                placeholder="✨ Enter a topic... e.g. Binary Search"
-            ></textarea>
-
-
-            <!-- MAIN BUTTON -->
-            <button
-                type="button"
-                onclick="generate()"
-                class="generate-button"
-            >
-                Generate Study Guide 🚀
-            </button>
-
-
-            <!-- QUIZ BUTTON -->
-            <button
-                type="button"
-                onclick="generateQuiz()"
-                class="quiz-button"
-            >
-                🧠 Test My Knowledge
-            </button>
-
-        </div>
-
-
-        <!-- AI RESULT -->
-        <div id="result">
-
-            <h2>📖 Your Study Guide</h2>
-
-            <p>
-                Your AI-generated explanation will appear here.
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>

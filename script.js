@@ -1,269 +1,86 @@
-// =================================
-// INTERACTIVE QUIZ
-// =================================
+const topicInput = document.getElementById('topicInput');
+const guideBtn = document.getElementById('guideBtn');
+const quizBtn = document.getElementById('quizBtn');
+const outputCard = document.getElementById('outputCard');
+const outputContent = document.getElementById('outputContent');
 
-async function generateQuiz() {
+// 1. Generate Study Guide Handler
+guideBtn.addEventListener('click', async () => {
+  const topic = topicInput.value.trim();
+  if (!topic) return alert('Please enter a topic first!');
 
-    const topic = document.getElementById("topic").value.trim();
-    const result = document.getElementById("result");
+  showLoading('Generating your study guide...');
 
-    if (topic === "") {
-        alert("Please enter a topic first!");
-        return;
-    }
+  try {
+    const res = await fetch('/study-guide', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ topic })
+    });
+    const data = await res.json();
 
-    result.innerHTML = `
-        <h2>🧠 Creating Your Quiz...</h2>
-        <p>StudyMate is preparing your questions...</p>
+    if (!res.ok) throw new Error(data.error || 'Failed to fetch');
+
+    outputContent.innerHTML = `
+      <h2 style="margin-bottom: 1rem;">📖 ${topic} Study Guide</h2>
+      <div style="line-height: 1.6; white-space: pre-wrap;">${data.result}</div>
     `;
-
-    try {
-
-        const response = await fetch("/quiz", {
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-                topic: topic
-            })
-        });
-
-        const data = await response.json();
-
-        if (data.error) {
-            throw new Error(data.error);
-        }
-
-        // Check that Gemini returned questions
-        if (
-            !data.questions ||
-            !Array.isArray(data.questions) ||
-            data.questions.length === 0
-        ) {
-            throw new Error(
-                "Quiz questions were not generated correctly. Please try again."
-            );
-        }
-
-        let currentQuestion = 0;
-        let score = 0;
-        let answered = false;
-
-
-        // ===============================
-        // SHOW QUESTION
-        // ===============================
-
-        function showQuestion() {
-
-            answered = false;
-
-            const q = data.questions[currentQuestion];
-
-            if (!q || !q.options) {
-
-                result.innerHTML = `
-                    <h2>❌ Quiz Error</h2>
-                    <p>This question was not generated correctly.</p>
-                `;
-
-                return;
-            }
-
-            result.innerHTML = `
-
-                <h2>🧠 ${topic} Quiz</h2>
-
-                <div class="study-card">
-
-                    <h3>
-                        Question ${currentQuestion + 1}
-                        of ${data.questions.length}
-                    </h3>
-
-                    <p>
-                        <strong>${q.question}</strong>
-                    </p>
-
-                    <button
-                        class="answer-button"
-                        onclick="selectAnswer('A')"
-                    >
-                        A. ${q.options.A}
-                    </button>
-
-                    <button
-                        class="answer-button"
-                        onclick="selectAnswer('B')"
-                    >
-                        B. ${q.options.B}
-                    </button>
-
-                    <button
-                        class="answer-button"
-                        onclick="selectAnswer('C')"
-                    >
-                        C. ${q.options.C}
-                    </button>
-
-                    <button
-                        class="answer-button"
-                        onclick="selectAnswer('D')"
-                    >
-                        D. ${q.options.D}
-                    </button>
-
-                    <p id="feedback"></p>
-
-                </div>
-            `;
-        }
-
-
-        // ===============================
-        // CHECK ANSWER
-        // ===============================
-
-        window.selectAnswer = function(selected) {
-
-            if (answered) {
-                return;
-            }
-
-            answered = true;
-
-            const q = data.questions[currentQuestion];
-
-            const feedback =
-                document.getElementById("feedback");
-
-
-            if (selected === q.answer) {
-
-                score++;
-
-                feedback.innerHTML = `
-                    <strong>✅ Correct!</strong>
-                    <br><br>
-                    ${q.explanation}
-                `;
-
-            } else {
-
-                feedback.innerHTML = `
-                    <strong>❌ Incorrect!</strong>
-                    <br><br>
-                    Correct answer: ${q.answer}
-                    <br><br>
-                    ${q.explanation}
-                `;
-            }
-
-
-            // Go to next question
-            setTimeout(() => {
-
-                currentQuestion++;
-
-                if (
-                    currentQuestion <
-                    data.questions.length
-                ) {
-
-                    showQuestion();
-
-                } else {
-
-                    showFinalScore();
-
-                }
-
-            }, 2000);
-        };
-
-
-        // ===============================
-        // FINAL SCORE
-        // ===============================
-
-        function showFinalScore() {
-
-            let message;
-
-            if (score === 5) {
-
-                message =
-                    "🌟 Excellent! You mastered this topic!";
-
-            } else if (score >= 3) {
-
-                message =
-                    "👏 Good job! Keep practicing!";
-
-            } else {
-
-                message =
-                    "📚 Keep studying and try again!";
-            }
-
-
-            result.innerHTML = `
-
-                <h2>🎉 Quiz Completed!</h2>
-
-                <div class="study-card">
-
-                    <h3>🏆 Your Score</h3>
-
-                    <p
-                        style="
-                        font-size:32px;
-                        text-align:center;
-                        font-weight:bold;
-                        "
-                    >
-                        ${score} / ${data.questions.length}
-                    </p>
-
-                    <p style="text-align:center;">
-                        ${message}
-                    </p>
-
-                    <button
-                        class="generate-button"
-                        onclick="generateQuiz()"
-                    >
-                        🔄 Try Again
-                    </button>
-
-                </div>
-            `;
-        }
-
-
-        // Start quiz
-        showQuestion();
-
-    } catch (error) {
-
-        console.error("Quiz Error:", error);
-
-        result.innerHTML = `
-            <h2>❌ Quiz Error</h2>
-
-            <p>
-                ${error.message}
-            </p>
-
-            <button
-                class="quiz-button"
-                onclick="generateQuiz()"
-            >
-                🔄 Try Again
-            </button>
-        `;
-    }
+  } catch (err) {
+    showError(err.message);
+  }
+});
+
+// 2. Generate Quiz Handler
+quizBtn.addEventListener('click', async () => {
+  const topic = topicInput.value.trim();
+  if (!topic) return alert('Please enter a topic first!');
+
+  showLoading('Building interactive quiz...');
+
+  try {
+    const res = await fetch('/quiz', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ topic })
+    });
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.error || 'Failed to fetch');
+
+    renderQuiz(data.quiz, topic);
+  } catch (err) {
+    showError(err.message);
+  }
+});
+
+function showLoading(msg) {
+  outputCard.classList.remove('hidden');
+  outputContent.innerHTML = `<div class="spinner">⏳ ${msg}</div>`;
+}
+
+function showError(msg) {
+  outputCard.classList.remove('hidden');
+  outputContent.innerHTML = `
+    <h3 style="color: #ef4444; margin-bottom: 0.5rem;">❌ Request Failed</h3>
+    <p style="color: #64748b;">${msg}</p>
+  `;
+}
+
+function renderQuiz(questions, topic) {
+  let html = `<h2 style="margin-bottom: 1rem;">🧠 Quiz: ${topic}</h2>`;
+  
+  questions.forEach((q, idx) => {
+    html += `
+      <div style="margin-bottom: 1.5rem;">
+        <p style="font-weight: 700; margin-bottom: 0.5rem;">${idx + 1}. ${q.question}</p>
+        ${q.options.map(opt => `
+          <label style="display: block; padding: 0.5rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 0.4rem; cursor: pointer;">
+            <input type="radio" name="q${idx}" value="${opt}"> ${opt}
+          </label>
+        `).join('')}
+      </div>
+    `;
+  });
+
+  outputContent.innerHTML = html;
 }
