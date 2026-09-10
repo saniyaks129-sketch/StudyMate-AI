@@ -10,7 +10,7 @@ app.use(express.json());
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-// Endpoint 1: Generate Study Guide
+// API Route: Study Guide
 app.post('/api/study-guide', async (req, res) => {
   try {
     const { topic } = req.body;
@@ -28,7 +28,7 @@ app.post('/api/study-guide', async (req, res) => {
   }
 });
 
-// Endpoint 2: Generate Quiz
+// API Route: Quiz
 app.post('/api/quiz', async (req, res) => {
   try {
     const { topic } = req.body;
