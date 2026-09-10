@@ -1,11 +1,22 @@
 const express = require("express");
+const path = require("path");
 const { GoogleGenAI } = require("@google/genai");
 require("dotenv").config();
 
 const app = express();
 
 app.use(express.json());
-app.use(express.static("."));
+
+
+// ===============================
+// SERVE FRONTEND
+// ===============================
+
+app.use(express.static(__dirname));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
 
 
 // ===============================
@@ -183,13 +194,24 @@ Rules:
 
 
 // ===============================
-// START SERVER
+// START SERVER LOCALLY
 // ===============================
 
-app.listen(3000, () => {
+if (require.main === module) {
 
-    console.log(
-        "StudyMate AI running at http://localhost:3000"
-    );
+    app.listen(3000, () => {
 
-});
+        console.log(
+            "StudyMate AI running at http://localhost:3000"
+        );
+
+    });
+
+}
+
+
+// ===============================
+// VERCEL
+// ===============================
+
+module.exports = app;
