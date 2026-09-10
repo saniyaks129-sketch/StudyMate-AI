@@ -4,7 +4,7 @@
   --secondary: #ec4899;
   --secondary-hover: #db2777;
   --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #eef2ff 50%, #fce7f3 100%);
-  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-bg: rgba(255, 255, 255, 0.9);
   --text-main: #1e293b;
   --text-muted: #64748b;
   --radius: 20px;
@@ -29,7 +29,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Dynamic background lighting */
 .background-blobs .blob {
   position: absolute;
   filter: blur(80px);
@@ -42,7 +41,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 680px;
+  max-width: 620px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -76,7 +75,7 @@ body {
 .card {
   background: var(--card-bg);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: var(--radius);
   padding: 2rem;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);

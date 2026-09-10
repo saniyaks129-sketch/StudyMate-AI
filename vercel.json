@@ -2,7 +2,6 @@
   "version": 2,
   "rewrites": [
     { "source": "/study-guide", "destination": "/server.js" },
-    { "source": "/quiz", "destination": "/server.js" },
-    { "source": "/(.*)", "destination": "/server.js" }
+    { "source": "/quiz", "destination": "/server.js" }
   ]
 }
