@@ -1,14 +1,23 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 const { GoogleGenAI } = require('@google/genai');
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
-app.use(express.static('.'));
+
+// Serve static files (HTML, CSS, JS) from the current directory
+app.use(express.static(__dirname));
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+
+// Serve index.html on root access (Fixes "Cannot GET /")
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // Endpoint 1: Generate Study Guide
 app.post('/study-guide', async (req, res) => {
